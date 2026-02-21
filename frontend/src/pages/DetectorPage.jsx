@@ -125,9 +125,9 @@ export default function DetectorPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 selection:bg-indigo-100 selection:text-indigo-900">
+    <div className="min-h-screen bg-stone-50 selection:bg-teal-100 selection:text-teal-900">
       {/* Navigation */}
-      <nav className="sticky top-0 w-full bg-white/70 backdrop-blur-lg z-50 border-b border-slate-200">
+      <nav className="sticky top-0 w-full bg-white/80 backdrop-blur-lg z-50 border-b border-stone-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <button
@@ -139,7 +139,7 @@ export default function DetectorPage() {
             </button>
             
             <div className="flex items-center gap-2">
-              <div className="w-7 h-7 bg-slate-900 rounded flex items-center justify-center">
+              <div className="w-7 h-7 bg-teal-700 rounded flex items-center justify-center">
                 <Globe2 className="w-4 h-4 text-white" />
               </div>
               <span className="text-base font-bold text-slate-900 tracking-tight">TruthCheck</span>
@@ -196,7 +196,7 @@ export default function DetectorPage() {
                     onChange={(e) => setUrl(e.target.value)}
                     onKeyPress={handleKeyPress}
                     placeholder="https://www.nytimes.com/..."
-                    className="block w-full pl-11 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 focus:bg-white outline-none transition-all"
+                    className="block w-full pl-11 pr-4 py-4 bg-stone-50 border border-stone-200 rounded-xl text-stone-900 placeholder:text-stone-400 focus:ring-2 focus:ring-teal-500/20 focus:border-teal-600 focus:bg-white outline-none transition-all"
                     disabled={loading}
                   />
                 </div>
@@ -205,7 +205,7 @@ export default function DetectorPage() {
                   <button
                     onClick={analyzeArticle}
                     disabled={loading}
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-orange-600 text-white rounded-xl hover:bg-orange-700 disabled:bg-slate-200 disabled:text-slate-500 transition-all font-semibold shadow-lg shadow-slate-900/10 active:scale-95"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-teal-700 text-white rounded-xl hover:bg-teal-800 disabled:bg-stone-200 disabled:text-stone-500 transition-all font-semibold shadow-lg shadow-stone-900/10 active:scale-95"
                   >
                     {loading ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Zap className="w-4 h-4" />}
                     {loading ? 'Analyzing...' : 'Analyze Now'}
@@ -218,13 +218,13 @@ export default function DetectorPage() {
                   value={textInput}
                   onChange={(e) => setTextInput(e.target.value)}
                   placeholder="Paste the full article content here for a comprehensive audit..."
-                  className="block w-full px-4 py-4 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 focus:bg-white outline-none min-h-60 resize-none transition-all"
+                  className="block w-full px-4 py-4 bg-stone-50 border border-stone-200 rounded-xl text-stone-900 placeholder:text-stone-400 focus:ring-2 focus:ring-teal-500/20 focus:border-teal-600 focus:bg-white outline-none min-h-60 resize-none transition-all"
                   disabled={loading}
                 />
                 <button
                   onClick={analyzeArticle}
                   disabled={loading}
-                  className="w-full sm:w-auto px-8 py-3 bg-orange-600 text-white rounded-xl hover:bg-orange-700 disabled:bg-slate-200 disabled:text-slate-500 transition-all font-semibold"
+                  className="w-full sm:w-auto px-8 py-3 bg-teal-700 text-white rounded-xl hover:bg-teal-800 disabled:bg-stone-200 disabled:text-stone-500 transition-all font-semibold"
                 >
                   {loading ? 'Processing...' : 'Audit Text'}
                 </button>
@@ -334,12 +334,12 @@ export default function DetectorPage() {
                   <FileText className="w-24 h-24" />
                </div>
                <div className="relative z-10">
-                  <h3 className="text-sm font-bold uppercase tracking-widest text-indigo-400 mb-4">Deep Insight Summary</h3>
+                  <h3 className="text-sm font-bold uppercase tracking-widest text-teal-400 mb-4">Deep Insight Summary</h3>
                   <p className="text-slate-300 leading-relaxed text-lg mb-6">{result.summary}</p>
                   <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">
-                        <TrendingUp className="w-5 h-5 text-indigo-300" />
+                        <TrendingUp className="w-5 h-5 text-teal-300" />
                       </div>
                       <div>
                         <p className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Quality Audit</p>
@@ -353,7 +353,7 @@ export default function DetectorPage() {
             {/* Recommendations */}
             <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
               <h3 className="text-lg font-bold text-slate-900 mb-4 pb-4 border-b border-slate-100">Actionable Recommendations</h3>
-              <p className="text-slate-600 leading-relaxed italic border-l-4 border-indigo-500 pl-6 py-2">
+              <p className="text-stone-600 leading-relaxed italic border-l-4 border-teal-600 pl-6 py-2">
                 "{result.recommendations}"
               </p>
             </div>

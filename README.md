@@ -1,49 +1,98 @@
-# Fake News Detector - AI-Powered News Credibility Analysis
+<div align="center">
 
-A modern, AI-powered web application that analyzes news articles for credibility and trustworthiness. Built with React, Vite, and the Groq API (Llama 3.3).
+# 🔍 Fake News Detector
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
+**AI-powered news credibility analysis using Llama 3.3 70B**
 
-## 📋 Table of Contents
+Instantly verify the trustworthiness of any news article with deep source auditing, bias detection, and credibility scoring — all powered by state-of-the-art large language models.
 
-- [Features](#features)
-- [Architecture](#architecture)
-- [Getting Started](#getting-started)
-- [Project Structure](#project-structure)
-- [API Configuration](#api-configuration)
-- [How It Works](#how-it-works)
-- [Usage](#usage)
-- [Technologies Used](#technologies-used)
-- [Troubleshooting](#troubleshooting)
-- [Contributing](#contributing)
-- [License](#license)
+[![Version](https://img.shields.io/badge/version-1.0.0-0d6efd.svg)](https://github.com/sniphern3o/fake-news-detector-ai)
+[![License](https://img.shields.io/badge/license-MIT-10b981.svg)](LICENSE)
+[![Node](https://img.shields.io/badge/node-%3E%3D18.0.0-6366f1.svg)](https://nodejs.org)
+[![React](https://img.shields.io/badge/react-18-61dafb.svg)](https://react.dev)
 
-## ✨ Features
+</div>
 
-- **Deep Source Audit**: Investigates domain authority and historical accuracy.
-- **Bias Detection**: Detects emotional manipulation and political slant.
-- **Reliable URL Fetching**: Uses a private local proxy to bypass anti-bot protections.
-- **Manual Input Fallback**: Allows pasting text directly if a URL cannot be fetched.
-- **Modern UI**: Clean, responsive design with real-time analysis visualization.
+---
 
-## 🏗 Architecture
+## 📸 Screenshots
 
-The project is split into two main components:
+<div align="center">
+<table>
+  <tr>
+    <td align="center"><strong>Landing Page</strong></td>
+    <td align="center"><strong>Detector Interface</strong></td>
+  </tr>
+  <tr>
+    <td><img src="Screenshots/Fake News Detector - AI-Powered Credibility Analysis - Brave 2_22_2026 1_59_37 AM.png" width="400" /></td>
+    <td><img src="Screenshots/Fake News Detector - AI-Powered Credibility Analysis - Brave 2_22_2026 1_59_45 AM.png" width="400" /></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>URL Analysis</strong></td>
+    <td align="center"><strong>Credibility Results</strong></td>
+  </tr>
+  <tr>
+    <td><img src="Screenshots/Fake News Detector - AI-Powered Credibility Analysis - Brave 2_22_2026 2_00_13 AM.png" width="400" /></td>
+    <td><img src="Screenshots/Fake News Detector - AI-Powered Credibility Analysis - Brave 2_22_2026 2_01_24 AM.png" width="400" /></td>
+  </tr>
+</table>
+</div>
 
-- `/frontend`: React + Vite + Tailwind CSS
-- `/backend`: Node.js + Express + Cheerio (URL-parsing proxy for bypassing CORS)
+---
 
-## 🚀 Getting Started
+## ✨ Key Features
 
-### 1. Prerequisites
+| Feature                    | Description                                                                        |
+| -------------------------- | ---------------------------------------------------------------------------------- |
+| 🧠 **AI-Powered Analysis** | Uses Groq's Llama 3.3 70B model for deep credibility assessment                    |
+| 🔗 **URL Analysis**        | Paste any article URL — the backend proxy fetches and parses content automatically |
+| 📝 **Manual Text Input**   | Paste article text directly as a fallback when URL fetching isn't possible         |
+| 🏛️ **Source Auditing**     | Investigates domain authority, publication history, and track record               |
+| ⚖️ **Bias Detection**      | Identifies emotional manipulation, loaded language, and political slant            |
+| 📊 **Credibility Scoring** | Generates a 0–100 credibility score with detailed category breakdowns              |
+| 🎨 **Modern UI**           | Sleek, responsive interface built with React and Tailwind CSS                      |
 
-- Node.js (v18+)
-- Groq API Key (from https://console.groq.com/)
+---
 
-### 2. Installation
+## 🏗️ Architecture
 
-Install dependencies in both folders:
+```
+┌─────────────────────────────────────────────────────┐
+│                     Frontend                        │
+│          React 18 · Vite · Tailwind CSS             │
+│                                                     │
+│  ┌──────────┐    ┌──────────────┐   ┌────────────┐  │
+│  │ Landing  │───▶│   Detector   │──▶│  Results   │  │
+│  │  Page    │    │    Page      │   │  Display   │  │
+│  └──────────┘    └──────┬───────┘   └────────────┘  │
+└─────────────────────────┼───────────────────────────┘
+                          │
+              ┌───────────┼───────────┐
+              ▼                       ▼
+   ┌────────────────────┐  ┌───────────────────┐
+   │   Backend Proxy    │  │   Groq API        │
+   │   Node.js/Express  │  │   Llama 3.3 70B   │
+   │   :3001            │  │                   │
+   └────────────────────┘  └───────────────────┘
+```
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- **Node.js** v18 or higher
+- **Groq API Key** — get one free at [console.groq.com](https://console.groq.com/)
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/sniphern3o/fake-news-detector-ai.git
+cd fake-news-detector-ai
+```
+
+### 2. Install dependencies
 
 ```bash
 # Backend
@@ -51,104 +100,131 @@ cd backend && npm install
 
 # Frontend
 cd ../frontend && npm install
-3. Configuration
-Add your Groq API key to /frontend/.env:
+```
 
-VITE_GROQ_API_KEY=your_key_here
-4. Running the Application
-You must start both the backend and the frontend.
+### 3. Configure environment variables
 
-Terminal 1 (Backend):
+Create a `.env` file in the `frontend/` directory:
 
+```env
+VITE_GROQ_API_KEY=your_groq_api_key_here
+```
+
+### 4. Start the application
+
+Open **two terminals** and run:
+
+```bash
+# Terminal 1 — Backend
 cd backend && npm run dev
-Wait for: Backend proxy running on http://localhost:3001
+# ✓ Backend proxy running on http://localhost:3001
+```
 
-Terminal 2 (Frontend):
-
+```bash
+# Terminal 2 — Frontend
 cd frontend && npm run dev
-Wait for: Local: http://localhost:5173
+# ✓ App available at http://localhost:5173
+```
 
-Visit http://localhost:5173 to start analyzing.
+Open [http://localhost:5173](http://localhost:5173) in your browser and start analyzing.
 
-📁 Project Structure
+---
+
+## 📁 Project Structure
+
+```
 fake-news-detector/
 ├── backend/
 │   ├── src/
-│   │   └── index.js
-│   ├── .env
+│   │   └── index.js          # Express proxy server
+│   ├── .env                   # Backend environment config
 │   └── package.json
 ├── frontend/
 │   ├── src/
 │   │   ├── config/
-│   │   │   └── api.js
+│   │   │   └── api.js         # API configuration & prompts
 │   │   ├── pages/
 │   │   │   ├── LandingPage.jsx
 │   │   │   └── DetectorPage.jsx
-│   │   ├── App.jsx
-│   │   └── main.jsx
-│   ├── .env
+│   │   ├── App.jsx            # Root component & routing
+│   │   ├── main.jsx           # Entry point
+│   │   └── index.css          # Global styles
+│   ├── .env                   # Frontend environment config
 │   └── package.json
+├── Screenshots/               # App screenshots
+├── API.md                     # Full API documentation
+├── SETUP.md                   # Detailed setup guide
+├── QUICKSTART.md              # Quick start reference
 └── README.md
-🔑 API Configuration
-Groq AI API
-This application uses the Groq API (Llama 3.3) for AI-powered analysis.
-
-Sign up at https://console.groq.com/
-
-Create a new API key
-
-Add it to your frontend .env file
-
-🔧 How It Works
-Content Fetching: Backend proxy extracts article content.
-
-Fallback Strategy: Falls back to manual input if extraction fails.
-
-AI Analysis: Extracted text is sent to Groq (Llama 3.3).
-
-Scoring: Generates a credibility score (0–100) based on source, bias, and content analysis.
-
-💻 Usage
-Paste a news article URL.
-
-Click "Analyze".
-
-If fetching fails, use the "Paste Text" option.
-
-View detailed credibility insights.
-
-🛡 Technologies Used
-Frontend: React 18, Vite, Tailwind CSS, React Router
-
-Backend: Node.js, Express, Axios, Cheerio
-
-AI: Groq (Llama 3.3 70B)
-
-🐛 Troubleshooting
-Failed to fetch article
-Ensure backend is running on port 3001.
-
-Use manual input if the site blocks scraping.
-
-API Key Error
-Ensure .env is inside the frontend folder.
-
-Confirm variable name is VITE_GROQ_API_KEY.
-
-🤝 Contributing
-Pull requests are welcome.
-
-📄 License
-MIT License
-
-Built with React and Groq AI
-
+```
 
 ---
 
-Now run:
+## ⚙️ How It Works
 
-```bash
-git add README.md
-git commit -m "Resolved merge conflict - kept local version"
-git push
+1. **Input** — User provides a news article via URL or pasted text.
+2. **Content Extraction** — The backend proxy fetches and parses the article using Axios and Cheerio, bypassing CORS and anti-bot protections.
+3. **AI Analysis** — The extracted content is sent to Groq's Llama 3.3 70B model with a specialized fact-checking prompt.
+4. **Credibility Report** — The AI returns a structured JSON response with a credibility score (0–100), bias indicators, source reliability metrics, and detailed reasoning.
+
+> If the URL fetch fails, the app gracefully falls back to manual text input — so analysis is always possible.
+
+---
+
+## �️ Tech Stack
+
+| Layer        | Technologies                                                   |
+| ------------ | -------------------------------------------------------------- |
+| **Frontend** | React 18, Vite 6, Tailwind CSS 4, React Router 6, Lucide Icons |
+| **Backend**  | Node.js, Express, Axios, Cheerio                               |
+| **AI / LLM** | Groq API — Llama 3.3 70B Versatile                             |
+
+---
+
+## 🐛 Troubleshooting
+
+<details>
+<summary><strong>"Failed to fetch article"</strong></summary>
+
+- Make sure the backend is running on port `3001`.
+- Some websites actively block scraping — use the **Paste Text** tab instead.
+</details>
+
+<details>
+<summary><strong>"API Key Error"</strong></summary>
+
+- Ensure `.env` exists inside the `frontend/` directory.
+- The variable must be named exactly `VITE_GROQ_API_KEY`.
+- Restart the frontend dev server after changing `.env`.
+</details>
+
+<details>
+<summary><strong>CORS errors</strong></summary>
+
+- The backend proxy handles CORS — make sure it's running before the frontend.
+- Check that the frontend is pointing to `http://localhost:3001`.
+</details>
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to open an issue or submit a pull request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m "Add amazing feature"`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+
+---
+
+<div align="center">
+  <sub>Built with ❤️ using React, Groq AI, and Llama 3.3</sub>
+</div>
