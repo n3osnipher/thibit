@@ -123,15 +123,3 @@ If analysis fails with an API error:
 - Restart the development server.
 
 ---
-
-## 🚢 Deployment
-
-### Frontend (e.g., Vercel / Netlify)
-
-- Build the app: `cd frontend && npm run build`.
-- Deploy the `dist` folder.
-- **IMPORTANT**: You must also host the backend proxy somewhere (e.g., Render, Railway) and update `frontend/src/config/api.js` with the production backend URL.
-
----
-
-**Built with ❤️ using React and Groq AI**
