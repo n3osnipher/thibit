@@ -1,9 +1,8 @@
 
 export const API_CONFIG = {
-  // Groq API endpoint (OpenAI compatible)
+  // Groq API endpoint 
   BASE_URL: 'https://api.groq.com/openai/v1/chat/completions',
   
-  // Model to use for analysis (Updated to latest stable Llama 3.3)
   MODEL: 'llama-3.3-70b-versatile',
   
   // Maximum tokens for response
@@ -17,7 +16,7 @@ export const API_CONFIG = {
 };
 
 /**
- * Fetches article content using multiple CORS proxies (Waterfall strategy)
+ * Fetches article content using multiple CORS proxies 
  * @param {string} url - The URL of the article
  * @returns {Promise<string>} - The article text content
  */

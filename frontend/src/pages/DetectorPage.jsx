@@ -4,7 +4,6 @@ import {
   AlertCircle, 
   CheckCircle2, 
   XCircle, 
-  Globe2, 
   FileText, 
   TrendingUp, 
   ArrowLeft, 
@@ -12,7 +11,6 @@ import {
   RefreshCw,
   Info,
   ChevronRight,
-  ShieldCheck,
   AlertTriangle,
   Zap
 } from 'lucide-react';
@@ -24,7 +22,7 @@ export default function DetectorPage() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState('');
-  const [activeTab, setActiveTab] = useState('url'); // 'url' or 'text'
+  const [activeTab, setActiveTab] = useState('url');
   const [textInput, setTextInput] = useState('');
 
   const analyzeArticle = async () => {
@@ -117,65 +115,72 @@ export default function DetectorPage() {
 
   const getVerdictStyles = (verdict) => {
     switch (verdict) {
-      case 'CREDIBLE': return { text: 'text-emerald-700', bg: 'bg-emerald-50', border: 'border-emerald-200', icon: <CheckCircle2 className="w-5 h-5" /> };
-      case 'QUESTIONABLE': return { text: 'text-amber-700', bg: 'bg-amber-50', border: 'border-amber-200', icon: <AlertTriangle className="w-5 h-5" /> };
-      case 'LIKELY_FAKE': return { text: 'text-rose-700', bg: 'bg-rose-50', border: 'border-rose-200', icon: <XCircle className="w-5 h-5" /> };
-      default: return { text: 'text-slate-700', bg: 'bg-slate-50', border: 'border-slate-200', icon: <Info className="w-5 h-5" /> };
+      case 'CREDIBLE': return { text: 'text-emerald', bg: 'bg-emerald-light', border: 'border-emerald/20', icon: <CheckCircle2 className="w-5 h-5" /> };
+      case 'QUESTIONABLE': return { text: 'text-amber-accent', bg: 'bg-amber-light', border: 'border-amber-accent/20', icon: <AlertTriangle className="w-5 h-5" /> };
+      case 'LIKELY_FAKE': return { text: 'text-rose-accent', bg: 'bg-rose-light', border: 'border-rose-accent/20', icon: <XCircle className="w-5 h-5" /> };
+      default: return { text: 'text-navy-faded', bg: 'bg-ice', border: 'border-border-subtle', icon: <Info className="w-5 h-5" /> };
     }
   };
 
+  const getScoreColor = (score) => {
+    if (score > 70) return 'bg-emerald';
+    if (score > 40) return 'bg-amber-accent';
+    return 'bg-rose-accent';
+  };
+
+  const getReliabilityColor = (rel) => {
+    if (rel === 'HIGH') return 'text-emerald';
+    if (rel === 'MEDIUM') return 'text-amber-accent';
+    return 'text-rose-accent';
+  };
+
   return (
-    <div className="min-h-screen bg-stone-50 selection:bg-teal-100 selection:text-teal-900">
+    <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="sticky top-0 w-full bg-white/80 backdrop-blur-lg z-50 border-b border-stone-200">
+      <nav className="sticky top-0 w-full bg-white border-b border-border-subtle z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <button
               onClick={() => navigate('/')}
-              className="group flex items-center gap-2 text-slate-500 hover:text-slate-900 transition-colors py-2"
+              className="group flex items-center gap-2 text-slate-text hover:text-navy transition-colors py-2"
             >
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
-              <span className="text-sm font-medium">Dashboard</span>
+              <span className="text-sm font-semibold uppercase tracking-wide">Back</span>
             </button>
             
-            <div className="flex items-center gap-2">
-              <div className="w-7 h-7 bg-teal-700 rounded flex items-center justify-center">
-                <Globe2 className="w-4 h-4 text-white" />
-              </div>
-              <span className="text-base font-bold text-slate-900 tracking-tight">TruthCheck</span>
-            </div>
+            <span className="text-xl font-bold text-navy tracking-tight font-display italic">Thibit</span>
 
-            <div className="w-20 hidden sm:block"></div> {/* Spacer */}
+            <div className="w-16 hidden sm:block" />
           </div>
         </div>
       </nav>
 
       <main className="max-w-4xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
-        {/* Workspace Header */}
-        <div className="mb-12">
-          <h1 className="text-3xl font-bold text-slate-900 tracking-tight mb-2">News Credibility Analysis</h1>
-          <p className="text-slate-500">Provide an article URL or paste text to perform a deep credibility audit.</p>
+        {/* Header */}
+        <div className="mb-10">
+          <h1 className="text-3xl font-bold text-navy tracking-tight uppercase mb-2">Credibility Analysis</h1>
+          <p className="text-slate-text text-sm">Provide an article URL or paste text to perform a deep credibility audit.</p>
         </div>
 
         {/* Input Section */}
-        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden mb-8">
+        <div className="bg-ice rounded-3xl overflow-hidden mb-8">
           {/* Tabs */}
-          <div className="flex bg-slate-50/50 p-1 border-b border-slate-200">
+          <div className="flex p-1.5 bg-lavender/50">
             <button
-              className={`flex-1 py-2 px-4 text-sm font-medium rounded-lg transition-all ${
+              className={`flex-1 py-2.5 px-4 text-sm font-bold rounded-2xl transition-all uppercase tracking-wide ${
                 activeTab === 'url' 
-                  ? 'bg-white text-slate-900 shadow-sm border border-slate-200' 
-                  : 'text-slate-500 hover:text-slate-700'
+                  ? 'bg-white text-navy shadow-sm' 
+                  : 'text-navy-faded hover:text-navy'
               }`}
               onClick={() => { setActiveTab('url'); setError(''); }}
             >
               Article URL
             </button>
             <button
-              className={`flex-1 py-2 px-4 text-sm font-medium rounded-lg transition-all ${
+              className={`flex-1 py-2.5 px-4 text-sm font-bold rounded-2xl transition-all uppercase tracking-wide ${
                 activeTab === 'text' 
-                  ? 'bg-white text-slate-900 shadow-sm border border-slate-200' 
-                  : 'text-slate-500 hover:text-slate-700'
+                  ? 'bg-white text-navy shadow-sm' 
+                  : 'text-navy-faded hover:text-navy'
               }`}
               onClick={() => { setActiveTab('text'); setError(''); }}
             >
@@ -188,24 +193,23 @@ export default function DetectorPage() {
               <div className="space-y-4">
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <Search className="h-5 w-5 text-slate-400" />
+                    <Search className="h-5 w-5 text-navy-faded" />
                   </div>
                   <input
                     type="url"
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
                     onKeyPress={handleKeyPress}
-                    placeholder="https://www.nytimes.com/..."
-                    className="block w-full pl-11 pr-4 py-4 bg-stone-50 border border-stone-200 rounded-xl text-stone-900 placeholder:text-stone-400 focus:ring-2 focus:ring-teal-500/20 focus:border-teal-600 focus:bg-white outline-none transition-all"
+                    placeholder="https://www.reuters.com/..."
+                    className="block w-full pl-12 pr-4 py-4 bg-white border border-border-subtle rounded-2xl text-charcoal placeholder:text-navy-faded/50 focus:ring-2 focus:ring-navy/15 focus:border-navy outline-none transition-all text-sm"
                     disabled={loading}
                   />
                 </div>
                 <div className="flex items-center justify-end">
-                  
                   <button
                     onClick={analyzeArticle}
                     disabled={loading}
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-teal-700 text-white rounded-xl hover:bg-teal-800 disabled:bg-stone-200 disabled:text-stone-500 transition-all font-semibold shadow-lg shadow-stone-900/10 active:scale-95"
+                    className="inline-flex items-center gap-2 px-7 py-3 bg-navy text-white rounded-full hover:bg-navy-light disabled:bg-border-subtle disabled:text-slate-text transition-all font-bold text-sm uppercase tracking-wider active:scale-[0.97]"
                   >
                     {loading ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Zap className="w-4 h-4" />}
                     {loading ? 'Analyzing...' : 'Analyze Now'}
@@ -217,14 +221,14 @@ export default function DetectorPage() {
                 <textarea
                   value={textInput}
                   onChange={(e) => setTextInput(e.target.value)}
-                  placeholder="Paste the full article content here for a comprehensive audit..."
-                  className="block w-full px-4 py-4 bg-stone-50 border border-stone-200 rounded-xl text-stone-900 placeholder:text-stone-400 focus:ring-2 focus:ring-teal-500/20 focus:border-teal-600 focus:bg-white outline-none min-h-60 resize-none transition-all"
+                  placeholder="Paste the full article content here..."
+                  className="block w-full px-4 py-4 bg-white border border-border-subtle rounded-2xl text-charcoal placeholder:text-navy-faded/50 focus:ring-2 focus:ring-navy/15 focus:border-navy outline-none min-h-60 resize-none transition-all text-sm"
                   disabled={loading}
                 />
                 <button
                   onClick={analyzeArticle}
                   disabled={loading}
-                  className="w-full sm:w-auto px-8 py-3 bg-teal-700 text-white rounded-xl hover:bg-teal-800 disabled:bg-stone-200 disabled:text-stone-500 transition-all font-semibold"
+                  className="w-full sm:w-auto px-8 py-3 bg-navy text-white rounded-full hover:bg-navy-light disabled:bg-border-subtle disabled:text-slate-text transition-all font-bold text-sm uppercase tracking-wider"
                 >
                   {loading ? 'Processing...' : 'Audit Text'}
                 </button>
@@ -232,95 +236,92 @@ export default function DetectorPage() {
             )}
 
             {error && (
-              <div className="mt-6 flex items-start gap-3 p-4 bg-rose-50 border border-rose-100 rounded-xl animate-fade-in">
-                <AlertCircle className="w-5 h-5 text-rose-600 shrink-0" />
-                <p className="text-sm text-rose-700 leading-relaxed font-medium">{error}</p>
+              <div className="mt-6 flex items-start gap-3 p-4 bg-rose-light border border-rose-accent/10 rounded-2xl animate-fade-in">
+                <AlertCircle className="w-5 h-5 text-rose-accent shrink-0" />
+                <p className="text-sm text-rose-accent leading-relaxed font-medium">{error}</p>
               </div>
             )}
           </div>
         </div>
 
-        {/* Loading Overlay Styles & Logic (Skeleton or Spinner) */}
+        {/* Loading */}
         {loading && (
-          <div className="bg-white rounded-2xl border border-slate-200 border-dashed p-16 text-center animate-pulse">
-            <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <RefreshCw className="w-8 h-8 text-slate-300 animate-spin" />
+          <div className="bg-ice rounded-3xl border-2 border-dashed border-lavender-dark p-16 text-center animate-pulse">
+            <div className="w-16 h-16 bg-lavender rounded-full flex items-center justify-center mx-auto mb-6">
+              <RefreshCw className="w-7 h-7 text-navy-faded animate-spin" />
             </div>
-            <h3 className="text-lg font-semibold text-slate-900 mb-2">Analyzing Credibility</h3>
-            <p className="text-slate-500 max-w-sm mx-auto">Cross-referencing claims and auditing source reputation with Llama 3 agents...</p>
+            <h3 className="text-lg font-bold text-navy mb-2 uppercase tracking-wide">Analyzing Credibility</h3>
+            <p className="text-sm text-navy-faded max-w-sm mx-auto">Cross-referencing claims and auditing source reputation...</p>
           </div>
         )}
 
-        {/* Results Workspace */}
+        {/* Results */}
         {result && !loading && (
-          <div className="space-y-6 animate-slide-up">
-            {/* Main Score & Verdict */}
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="md:col-span-2 bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
+          <div className="space-y-5 animate-slide-up">
+            {/* Score + Verdict */}
+            <div className="grid md:grid-cols-3 gap-5">
+              <div className="md:col-span-2 bg-ice rounded-3xl p-8">
                  <div className="flex items-start justify-between mb-8">
                     <div>
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2 block">Detection Result</span>
-                      <h2 className="text-3xl font-bold text-slate-900">{result.sourceName || 'Unknown Source'}</h2>
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-navy-faded mb-2 block">Detection Result</span>
+                      <h2 className="text-3xl font-bold text-navy uppercase tracking-tight">{result.sourceName || 'Unknown Source'}</h2>
                     </div>
-                    <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-bold uppercase tracking-tight ${getVerdictStyles(result.verdict).bg} ${getVerdictStyles(result.verdict).text} ${getVerdictStyles(result.verdict).border}`}>
+                    <div className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-xs font-bold uppercase tracking-tight ${getVerdictStyles(result.verdict).bg} ${getVerdictStyles(result.verdict).text} ${getVerdictStyles(result.verdict).border}`}>
                       {getVerdictStyles(result.verdict).icon}
                       {result.verdict.replace('_', ' ')}
                     </div>
                  </div>
-
                  <div className="space-y-2">
-                    <div className="flex justify-between text-xs font-bold text-slate-500 px-1 uppercase tracking-tight">
+                    <div className="flex justify-between text-xs font-bold text-navy-faded uppercase tracking-tight px-1">
                       <span>Credibility Confidence</span>
                       <span>{result.credibilityScore}%</span>
                     </div>
-                    <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+                    <div className="h-2.5 bg-lavender rounded-full overflow-hidden">
                       <div 
-                        className={`h-full transition-all duration-1000 ease-out rounded-full ${result.credibilityScore > 70 ? 'bg-emerald-500' : result.credibilityScore > 40 ? 'bg-amber-500' : 'bg-rose-500'}`}
+                        className={`h-full transition-all duration-1000 ease-out rounded-full ${getScoreColor(result.credibilityScore)}`}
                         style={{ width: `${result.credibilityScore}%` }}
-                      ></div>
+                      />
                     </div>
                  </div>
               </div>
 
-              <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm flex flex-col justify-center items-center text-center">
-                 <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4 block">Reliability</span>
-                 <div className={`text-4xl font-black mb-2 ${result.sourceReliability === 'HIGH' ? 'text-emerald-600' : result.sourceReliability === 'MEDIUM' ? 'text-amber-600' : 'text-rose-600'}`}>
+              <div className="bg-navy rounded-3xl p-8 flex flex-col justify-center items-center text-center text-white">
+                 <span className="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-4 block">Reliability</span>
+                 <div className={`text-4xl font-black mb-2 ${result.sourceReliability === 'HIGH' ? 'text-emerald' : result.sourceReliability === 'MEDIUM' ? 'text-amber-accent' : 'text-rose-accent'}`}>
                     {result.sourceReliability}
                  </div>
-                 <p className="text-xs text-slate-400 font-medium">Domain Trust Rating</p>
+                 <p className="text-xs text-white/40 font-semibold uppercase tracking-wider">Domain Trust</p>
               </div>
             </div>
 
-            {/* Analysis Grid */}
-            <div className="grid md:grid-cols-2 gap-6">
-              {/* Positive Indicators */}
-              <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
-                <div className="flex items-center gap-2 mb-6">
-                  <div className="w-8 h-8 bg-emerald-50 rounded-lg flex items-center justify-center text-emerald-600">
+            {/* Indicators */}
+            <div className="grid md:grid-cols-2 gap-5">
+              <div className="bg-ice rounded-3xl p-7">
+                <div className="flex items-center gap-2.5 mb-6">
+                  <div className="w-9 h-9 bg-emerald rounded-xl flex items-center justify-center text-white">
                     <CheckCircle2 className="w-5 h-5" />
                   </div>
-                  <h3 className="font-bold text-slate-900">Green Flags</h3>
+                  <h3 className="font-bold text-navy uppercase tracking-wide text-sm">Green Flags</h3>
                 </div>
-                <ul className="space-y-4">
+                <ul className="space-y-3">
                   {result.positiveIndicators?.map((item, i) => (
-                    <li key={i} className="flex gap-3 text-sm text-slate-600 leading-relaxed border-l-2 border-emerald-100 pl-4 py-0.5">
+                    <li key={i} className="flex gap-3 text-sm text-charcoal leading-relaxed border-l-2 border-emerald/25 pl-4 py-0.5">
                       {item}
                     </li>
                   ))}
                 </ul>
               </div>
 
-              {/* Negative Indicators */}
-              <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
-                <div className="flex items-center gap-2 mb-6">
-                  <div className="w-8 h-8 bg-rose-50 rounded-lg flex items-center justify-center text-rose-600">
+              <div className="bg-ice rounded-3xl p-7">
+                <div className="flex items-center gap-2.5 mb-6">
+                  <div className="w-9 h-9 bg-rose-accent rounded-xl flex items-center justify-center text-white">
                     <AlertCircle className="w-5 h-5" />
                   </div>
-                  <h3 className="font-bold text-slate-900">Risk Factors</h3>
+                  <h3 className="font-bold text-navy uppercase tracking-wide text-sm">Risk Factors</h3>
                 </div>
-                <ul className="space-y-4">
+                <ul className="space-y-3">
                   {result.negativeIndicators?.map((item, i) => (
-                    <li key={i} className="flex gap-3 text-sm text-slate-600 leading-relaxed border-l-2 border-rose-100 pl-4 py-0.5">
+                    <li key={i} className="flex gap-3 text-sm text-charcoal leading-relaxed border-l-2 border-rose-accent/25 pl-4 py-0.5">
                       {item}
                     </li>
                   ))}
@@ -328,52 +329,47 @@ export default function DetectorPage() {
               </div>
             </div>
 
-            {/* Detailed Insights */}
-            <div className="bg-slate-900 rounded-2xl p-8 text-white shadow-xl shadow-slate-900/20 relative overflow-hidden">
-               <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
-                  <FileText className="w-24 h-24" />
+            {/* Deep Insight */}
+            <div className="bg-navy rounded-3xl p-8 text-white relative overflow-hidden">
+               <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
+                 <FileText className="w-24 h-24" />
                </div>
                <div className="relative z-10">
-                  <h3 className="text-sm font-bold uppercase tracking-widest text-teal-400 mb-4">Deep Insight Summary</h3>
-                  <p className="text-slate-300 leading-relaxed text-lg mb-6">{result.summary}</p>
-                  <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">
-                        <TrendingUp className="w-5 h-5 text-teal-300" />
-                      </div>
-                      <div>
-                        <p className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Quality Audit</p>
-                        <p className="text-sm font-semibold">{result.contentQuality}</p>
-                      </div>
-                    </div>
-                  </div>
+                 <h3 className="text-xs font-bold uppercase tracking-widest text-white/50 mb-4">Deep Insight Summary</h3>
+                 <p className="text-white/70 leading-relaxed text-base mb-6">{result.summary}</p>
+                 <div className="pt-6 border-t border-white/10 flex items-center gap-3">
+                   <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">
+                     <TrendingUp className="w-5 h-5 text-white/60" />
+                   </div>
+                   <div>
+                     <p className="text-[10px] uppercase font-bold text-white/30 tracking-wider">Quality Audit</p>
+                     <p className="text-sm font-semibold">{result.contentQuality}</p>
+                   </div>
+                 </div>
                </div>
             </div>
 
             {/* Recommendations */}
-            <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
-              <h3 className="text-lg font-bold text-slate-900 mb-4 pb-4 border-b border-slate-100">Actionable Recommendations</h3>
-              <p className="text-stone-600 leading-relaxed italic border-l-4 border-teal-600 pl-6 py-2">
+            <div className="bg-ice rounded-3xl p-8">
+              <h3 className="text-sm font-bold text-navy uppercase tracking-wide mb-4 pb-4 border-b border-navy/10">Recommendations</h3>
+              <p className="text-slate-text leading-relaxed italic border-l-4 border-navy pl-6 py-2 text-sm">
                 "{result.recommendations}"
               </p>
             </div>
 
-            {/* CTA */}
-            <div className="flex justify-center pt-8">
+            {/* Reset CTA */}
+            <div className="flex justify-center pt-6">
                <button
-                  onClick={resetAnalysis}
-                  className="px-10 py-4 bg-slate-900 text-white rounded-2xl hover:bg-slate-800 transition-all font-bold shadow-xl shadow-slate-900/10 flex items-center gap-3 active:scale-95"
+                 onClick={resetAnalysis}
+                 className="px-10 py-4 bg-navy text-white rounded-full hover:bg-navy-light transition-all font-bold text-sm uppercase tracking-wider flex items-center gap-3 active:scale-[0.97]"
                >
-                  Audit New Article
-                  <ChevronRight className="w-5 h-5" />
+                 Audit New Article
+                 <ChevronRight className="w-5 h-5" />
                </button>
             </div>
           </div>
         )}
-
-      
       </main>
     </div>
   );
 }
-

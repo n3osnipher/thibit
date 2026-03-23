@@ -15,7 +15,7 @@ dotenv.config({ path: join(__dirname, '../.env') });
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(cors());
+app.use(cors()); //Allows frontend to access backend
 app.use(express.json());
 
 // Helper to determine if a URL is valid
@@ -30,7 +30,7 @@ const isValidUrl = (string) => {
 
 app.get('/api/fetch-article', async (req, res) => {
   const { url } = req.query;
-
+  // Scraping logic
   if (!url || !isValidUrl(url)) {
     return res.status(400).json({ error: 'Invalid or missing URL parameter' });
   }
