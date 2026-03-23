@@ -265,7 +265,7 @@ export default function LandingPage() {
           <div className="flex gap-8 text-sm text-slate-text">
             <a href="#" className="hover:text-navy transition-colors">Privacy</a>
             <a href="#" className="hover:text-navy transition-colors">Terms</a>
-            <a href="https://github.com" target="_blank" rel="noreferrer" className="hover:text-navy transition-colors">GitHub</a>
+            <a href="https://github.com/n3osnipher" target="_blank" rel="noreferrer" className="hover:text-navy transition-colors">GitHub</a>
           </div>
           <p className="text-xs text-slate-text">© 2026 Thibit. Bruce Ominde.</p>
         </div>
