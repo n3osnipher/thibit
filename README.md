@@ -1,0 +1,174 @@
+# 🛡️ Thibit — Verify Before You Share
+
+[![License: MIT](https://img.shields.org/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Node.js Version](https://img.shields.org/badge/node-%3E%3D18.0.0-brightgreen.svg)](https://nodejs.org/)
+[![React Version](https://img.shields.org/badge/react-18-blue.svg)](https://react.dev/)
+[![Vite Version](https://img.shields.org/badge/vite-6-purple.svg)](https://vite.dev/)
+
+**Thibit** is an AI-powered news credibility analyzer designed to combat misinformation. By pasting any article URL or text, you get an instant, deep-dive credibility report powered by **Llama 3.3 70B** via the **Groq Cloud API**.
+
+---
+
+## ✨ Features
+
+- 🔍 **Source Verification** — Analyzes publisher track records, ownership, and editorial standards against 200+ known outlets.
+- ⚖️ **Bias Analysis** — Uses NLP to detect emotional manipulation, loaded language, and one-sided framing.
+- 🔗 **Claim Cross-Referencing** — Extracts key factual claims and compares them against independent reporting patterns.
+- 📄 **URL or Text Input** — Flexible analysis: paste a link or the article text directly.
+- ⚡ **Instant Reports** — Get a credibility score, verdict, and detailed breakdown in seconds.
+- 🔓 **No Account Required** — Privacy-focused: free to use, no sign-up, no tracking.
+
+## 🛠️ Tech Stack
+
+| Layer          | Technology                                              |
+| :------------- | :------------------------------------------------------ |
+| **Frontend**   | React 18, Vite 6, Tailwind CSS v4, Lucide Icons         |
+| **Backend**    | Node.js, Express                                        |
+| **AI Model**   | Llama 3.3 70B via [Groq API](https://groq.com)          |
+| **Scraping**   | Cheerio + Axios (backend) / AllOrigins proxy (fallback) |
+| **Typography** | DM Sans, Playfair Display                               |
+
+---
+
+## 📂 Project Structure
+
+```bash
+thibit/
+├── frontend/               # React + Vite SPA
+│   ├── src/
+│   │   ├── pages/          # Landing and Detector pages
+│   │   ├── config/         # API & Groq logic
+│   │   ├── index.css       # Tailwind v4 theme
+│   │   └── App.jsx         # Routing & State
+│   ├── index.html
+│   └── package.json
+├── backend/                # Express proxy server
+│   ├── src/
+│   │   └── index.js        # Article scraping & sanitization
+│   └── package.json
+└── README.md
+```
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- **Node.js** ≥ 18
+- **Groq API key** — Get one for free at [console.groq.com](https://console.groq.com)
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/n3osnipher/thibit.git
+cd thibit
+```
+
+### 2. Set Up the Backend
+
+```bash
+cd backend
+npm install
+```
+
+Create a `.env` file in the `backend/` directory:
+
+```env
+PORT=3001
+```
+
+Start the backend:
+
+```bash
+npm start
+```
+
+### 3. Set Up the Frontend
+
+Open a new terminal:
+
+```bash
+cd frontend
+npm install
+```
+
+Create a `.env` file in the `frontend/` directory:
+
+```env
+VITE_GROQ_API_KEY=your_groq_api_key_here
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+The app will be available at **http://localhost:3000**.
+
+---
+
+## 🧠 How It Works
+
+1.  **Input Submission**: User provides an article URL or raw text.
+2.  **Scraping & Cleaning**: If a URL is given, the backend uses **Cheerio** to strip away ads, navigation, and scripts, leaving only pure article text.
+3.  **AI Analysis**: The cleaned text is sent to **Llama 3.3 70B** with a specialized prompt for credibility analysis.
+4.  **Structured Feedback**: The AI returns a JSON report including:
+    - **Credibility Score** (0-100)
+    - **Verdict** (Confirmed, Unverified, Misleading)
+    - **Bias Detection**
+    - **Key Indicators** (Source reliability, factual density)
+5.  **Dashboard Rendering**: The frontend displays these insights in a clean, bento-grid styled dashboard.
+
+---
+
+## 🌐 Deployment
+
+### Recommended Platform: [Railway](https://railway.app)
+
+1. **GitHub Setup**: Push your project to a GitHub repository.
+2. **Backend Deployment**:
+   - Create a new service on Railway connected to your repo.
+   - Root Directory: `backend`
+   - Start Command: `npm start`
+   - Env Vars: `PORT=3001`.
+3. **Frontend Deployment**:
+   - Create another service connected to the same repo.
+   - Root Directory: `frontend`
+   - Build Command: `npm run build`
+   - Start Command: `npx serve dist` (or static hosting like Vercel/Netlify).
+   - **Crucial Env Vars**:
+     - `VITE_GROQ_API_KEY`: Your Groq API key.
+     - `VITE_BACKEND_URL`: The public URL of your Railway backend service (e.g., `https://backend-production.up.railway.app`).
+
+### Local Testing After Changes
+
+To test with the new dynamic variables locally, ensuring you have a `frontend/.env` file:
+
+```env
+VITE_BACKEND_URL=http://localhost:3001
+VITE_GROQ_API_KEY=your_key_here
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+---
+
+## 🧔 Author
+
+**Bruce Ominde** — [@n3osnipher](https://github.com/n3osnipher)

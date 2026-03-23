@@ -22,8 +22,8 @@ export const API_CONFIG = {
  */
 export async function fetchArticleContent(url) {
   const proxies = [
-    // Priority 1: Local Backend (Most reliable, handles anti-bot)
-    { url: (u) => `http://localhost:3001/api/fetch-article?url=${encodeURIComponent(u)}`, type: 'json' },
+    // Priority 1: Local/Production Backend (Handles anti-bot)
+    { url: (u) => `${import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001'}/api/fetch-article?url=${encodeURIComponent(u)}`, type: 'json' },
     // Priority 2: AllOrigins (Public proxy fallback)
     { url: (u) => `https://api.allorigins.win/get?url=${encodeURIComponent(u)}`, type: 'json' },
     // Priority 3: Corsproxy.io (Direct HTML fallback)

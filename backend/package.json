@@ -1,7 +1,7 @@
 {
-  "name": "fake-news-detector-backend",
+  "name": "thibit-backend",
   "version": "1.0.0",
-  "description": "Backend proxy server for Fake News Detector",
+  "description": "Backend proxy server for Thibit",
   "main": "src/index.js",
   "type": "module",
   "scripts": {
