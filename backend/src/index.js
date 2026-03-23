@@ -9,8 +9,8 @@ import dotenv from 'dotenv';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// Load environment variables from .env file inside backend root
-dotenv.config({ path: join(__dirname, '../.env') });
+// Load environment variables (will use Railway/Environment variables in production)
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
