@@ -62,7 +62,7 @@ export async function fetchArticleContent(url) {
     }
   }
 
-  throw new Error(`Could not fetch article. Please use the "Paste Text" option. (Details: ${lastError?.message})`);
+  throw new Error(`The target website is actively blocking automated access (Bot Protection). Please manually copy the article and use the "Paste Text" option instead.`);
 }
 
 /**
