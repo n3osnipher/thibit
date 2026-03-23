@@ -1,7 +1,7 @@
 # 🛡️ Thibit — Verify Before You Share
 
 [![License: MIT](https://img.shields.org/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Node.js Version](https://img.shields.org/badge/node-%3E%3D18.0.0-brightgreen.svg)](https://nodejs.org/)
+[![Node.js Version](https://img.shields.org/badge/node-%3E%3D20.0.0-brightgreen.svg)](https://nodejs.org/)
 [![React Version](https://img.shields.org/badge/react-18-blue.svg)](https://react.dev/)
 [![Vite Version](https://img.shields.org/badge/vite-6-purple.svg)](https://vite.dev/)
 
@@ -55,7 +55,7 @@ thibit/
 
 ### Prerequisites
 
-- **Node.js** ≥ 18
+- **Node.js** ≥ 20
 - **Groq API key** — Get one for free at [console.groq.com](https://console.groq.com)
 
 ### 1. Clone the Repository
